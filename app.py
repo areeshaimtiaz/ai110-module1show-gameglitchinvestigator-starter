@@ -35,21 +35,34 @@ def check_guess(guess, secret):
 
     try:
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
         if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
+        # Original
+        # points = 100 - 10 * (attempt_number + 1)
+        # print("Attempt Limit: ", attempt_limit, " Attempt Number: ", attempt_number, " Points: ", points)
+
+
+        # My Attempt
+        points = 100 - 10 * (attempt_number - 1)
+        # print("Attempt Limit: ", attempt_limit, " Attempt Number: ", attempt_number, " Points: ", points)
+        
+        # AI Attempt
+        # points = 100 - 10 * (attempt_number)  
+        # print("Attempt Limit: ", attempt_limit, " Attempt Number: ", attempt_number, " Points: ", points)
+
+
         if points < 10:
             points = 10
         return current_score + points
